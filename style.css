@@ -1,0 +1,23 @@
+td.rating div.yelp {
+  margin: 10px 0;
+  font-size: 11px;
+}
+
+/* Clickable button styles */
+td.rating div.yelp-button a {
+  padding: 3px;
+  margin: 3px;
+  background-color: #C41200;
+  color: #FFFFFF;
+  border-radius: 3px;
+}
+
+td.rating div.yelp-button a:hover {
+  background-color: red;
+  text-decoration: none;
+}
+
+td.rating div.yelp-err,
+td.rating div.yelp-err a {
+  color: red;
+}

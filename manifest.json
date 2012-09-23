@@ -1,0 +1,24 @@
+{
+  "name" : "Yelp Ratings on Seamless",
+  "version" : "1.1",
+  "description" : "Shows button to load yelp ratings asynchronously on Seamless restaurant listings.",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.seamless.com/*",
+        "https://www.seamless.com/*"
+      ],
+      "css": ["style.css"],
+      "js": ["jquery.js", "reviews.js"]
+    }
+  ],
+  "permissions": [
+    "http://www.seamless-yelp.herokuapp.com/*",
+    "https://www.seamless-yelp.herokuapp.com/*"
+  ],
+  "web_accessible_resources": [
+    "images/star.png",
+    "images/star_half.png"
+  ],
+  "manifest_version": 2
+}
