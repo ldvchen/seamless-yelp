@@ -18,8 +18,9 @@
   ],
   "web_accessible_resources": [
     "images/loading.gif",
-    "images/star.png",
-    "images/star_half.png"
+    "images/full.gif",
+    "images/half.gif",
+    "images/empty.gif"
   ],
   "manifest_version": 2
 }

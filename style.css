@@ -3,20 +3,6 @@ td.rating div.yelp {
   font-size: 11px;
 }
 
-/* Clickable button styles */
-td.rating div.yelp-button a {
-  padding: 3px;
-  margin: 3px;
-  background-color: #C41200;
-  color: #FFFFFF;
-  border-radius: 3px;
-}
-
-td.rating div.yelp-button a:hover {
-  background-color: red;
-  text-decoration: none;
-}
-
 td.rating div.yelp .num-reviews {
   font-size: 10px;
 }
@@ -24,4 +10,18 @@ td.rating div.yelp .num-reviews {
 td.rating div.yelp-err,
 td.rating div.yelp-err a {
   color: red;
+}
+
+/* Clickable button styles */
+td.rating div.yelp a.button {
+  padding: 3px;
+  margin: 3px;
+  background-color: #C41200;
+  color: #FFFFFF;
+  border-radius: 3px;
+}
+
+td.rating div.yelp a.button:hover {
+  background-color: red;
+  text-decoration: none;
 }
