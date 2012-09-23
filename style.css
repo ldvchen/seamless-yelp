@@ -5,6 +5,8 @@ td.rating div.yelp {
 
 td.rating div.yelp .num-reviews {
   font-size: 10px;
+  display: block;
+  margin-top: 3px;
 }
 
 td.rating div.yelp-err,

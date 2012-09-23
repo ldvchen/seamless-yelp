@@ -17,16 +17,12 @@ getError = (err, restaurant_name) ->
 
 # Return div with Yelp rating and num reviews
 getReviews = (rating, review_count, url) ->
-  fullStarStr = ->
-    return "<img src='#{staticFiles.star}' />"
-  halfStarStr = ->
-    return "<img src='#{staticFiles.halfStar}' />"
-  emptyStarStr = ->
-    return "<img src='#{staticFiles.emptyStar}' />"
+  fullStarStr = -> "<img src='#{staticFiles.star}' />"
+  halfStarStr = -> "<img src='#{staticFiles.halfStar}' />"
+  emptyStarStr = -> "<img src='#{staticFiles.emptyStar}' />"
 
   reviews = $(document.createElement 'a')
   reviews.attr { href: url, target: '_blank', class: 'num-reviews' }
-  reviews.css { display: 'block', 'margin-top': '3px' }
   reviews.html "(#{review_count} reviews)"
 
   if rating?
@@ -45,7 +41,7 @@ $(document).ready ->
   $('td.rating').each ->
     $(this).append '<div class="yelp"><a class="button" href="#">Yelp It</a></div>'
 
-  $('div.yelp a').bind 'click', ->
+  $('div.yelp a.button').bind 'click', ->
     button = $(this)
     div = button.parent()
 
@@ -58,6 +54,7 @@ $(document).ready ->
       console.log 'No restaurant name for this table row?'
       return false
 
+    # Can't use jQuery ajax helpers in chrome extension.
     xhr = new XMLHttpRequest
     xhr.open "GET", "https://seamless-yelp.herokuapp.com/?s=#{encodeURI(name)}", true
     xhr.onreadystatechange = ->
