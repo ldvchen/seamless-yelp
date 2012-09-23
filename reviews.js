@@ -30,7 +30,7 @@ var showResults = function(res, div) {
   }
 
   var reviews = $(document.createElement('a'))
-    .attr({ href: res.url, target: "_blank"})
+    .attr({ href: res.url, target: "_blank", "class": "num-reviews"})
     .html("(" + res.review_count + " reviews)");
   div.html(reviews);
   div.prepend(stars);

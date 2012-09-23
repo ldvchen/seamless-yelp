@@ -17,6 +17,10 @@ td.rating div.yelp-button a:hover {
   text-decoration: none;
 }
 
+td.rating div.yelp .num-reviews {
+  font-size: 10px;
+}
+
 td.rating div.yelp-err,
 td.rating div.yelp-err a {
   color: red;
