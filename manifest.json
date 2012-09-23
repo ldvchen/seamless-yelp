@@ -13,10 +13,11 @@
     }
   ],
   "permissions": [
-    "http://www.seamless-yelp.herokuapp.com/*",
-    "https://www.seamless-yelp.herokuapp.com/*"
+    "http://seamless-yelp.herokuapp.com/*",
+    "https://seamless-yelp.herokuapp.com/*"
   ],
   "web_accessible_resources": [
+    "images/loading.gif",
     "images/star.png",
     "images/star_half.png"
   ],

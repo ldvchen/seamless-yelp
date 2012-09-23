@@ -1,4 +1,5 @@
 // full star image
+var loading = chrome.extension.getURL('images/loading.gif');
 var starImg = chrome.extension.getURL('images/star.png');
 var starHalfImg = chrome.extension.getURL('images/star_half.png');
 
@@ -49,18 +50,21 @@ $(document).ready(function() {
   // Add click target for added button.
   $(targets).each(function() {
     $(this).bind("click", function() {
-
       // $(this) is the <a> inside the div.
+      var div = $(this).parent();
+      div.removeClass("yelp-button");
+      $(this).html("<img src='"+loading+"' />");
+
       var name = $(this).parents("tr").first().children("td.restaurant").find("a").html();
       if (!name) {
         console.log("Something went wrong. Couldn't find restaurant name for this button?");
+	$(this).removeClass("loading");
         return false;
       }
 
       // Query our app, which queries Yelp API.
       var xhr = new XMLHttpRequest();
-      var div = $(this).parent();
-      xhr.open("GET", "http://seamlessyelp.herokuapp.com/?s="+encodeURI(name), true);
+      xhr.open("GET", "https://seamless-yelp.herokuapp.com/?s="+encodeURI(name), true);
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
           var res = $.parseJSON(xhr.responseText);
@@ -69,7 +73,6 @@ $(document).ready(function() {
           } else {
             showResults(res, div);
           }
-          div.removeClass("yelp-button");
         }
       };
       xhr.send();
