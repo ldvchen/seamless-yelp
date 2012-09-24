@@ -7,6 +7,7 @@ staticFiles =
   star : chrome.extension.getURL 'images/full.gif'
   halfStar : chrome.extension.getURL 'images/half.gif'
   emptyStar : chrome.extension.getURL 'images/empty.gif'
+  yelpLogo : chrome.extension.getURL 'images/yelpit.png'  
 
 # Return error message linked to Yelp manual search
 getError = (err, restaurant_name) ->
@@ -17,37 +18,36 @@ getError = (err, restaurant_name) ->
 
 # Return div with Yelp rating and num reviews
 getReviews = (rating, review_count, url) ->
-  fullStarStr = -> "<img src='#{staticFiles.star}' />"
-  halfStarStr = -> "<img src='#{staticFiles.halfStar}' />"
-  emptyStarStr = -> "<img src='#{staticFiles.emptyStar}' />"
+  fullStarStr = "<img src='#{staticFiles.star}' />"
+  halfStarStr = "<img src='#{staticFiles.halfStar}' />"
+  emptyStarStr = "<img src='#{staticFiles.emptyStar}' />"
 
   reviews = $(document.createElement 'a')
   reviews.attr { href: url, target: '_blank', class: 'num-reviews' }
   reviews.html "(#{review_count} reviews)"
 
   if rating?
-    stars = (fullStarStr() for i in [0 ... Math.floor(rating)]).join('')
-    stars += halfStarStr() if rating isnt Math.floor(rating)
-    stars += (emptyStarStr() for i in [0 ... (5 - Math.ceil(rating))]).join('')
+    stars = (fullStarStr for i in [0 ... Math.floor(rating)]).join('')
+    stars += halfStarStr if rating isnt Math.floor(rating)
+    stars += (emptyStarStr for i in [0 ... (5 - Math.ceil(rating))]).join('')
   else
     stars = "No Rating"
 
-  return { stars: stars, reviews: reviews }
+  return { stars: "<div class='stars'>#{stars}</div>", reviews: reviews }
 
 
 
 # Add a Yelp unit for every restaurant on the Seamless page.
 $(document).ready ->
   $('td.rating').each ->
-    $(this).append '<div class="yelp"><a class="button" href="#">Yelp It</a></div>'
+    $(this).append "<div class='yelp'><a class='button' href='javascript:void(0)'><img src='#{staticFiles.yelpLogo}' /></a></div>"
 
-  $('div.yelp a.button').bind 'click', ->
+  $('div.yelp a.button').one 'click', ->
     button = $(this)
     div = button.parent()
 
     # Replace button text with loading indicator
-    button.removeClass 'button'
-    button.html "<img src='#{staticFiles.loading}' />"
+    button.append "<img class='waiting' src='#{staticFiles.loading}' />"
 
     name = button.parents('tr').first().children('td.restaurant').find('a').html()
     if not name
@@ -60,13 +60,15 @@ $(document).ready ->
     xhr.onreadystatechange = ->
       if xhr.readyState is 4
         res = $.parseJSON xhr.responseText
+        button.removeClass 'button'
+        div.find('.waiting').remove()
         if res.error?
           err = getError(res.error, name)
-          div.html err
+          div.append err
           div.addClass 'yelp-err'
         else
           ratings = getReviews(res.rating, res.review_count, res.url)
-          div.html ratings.stars
+          div.append ratings.stars
           div.append ratings.reviews
     xhr.send()
 

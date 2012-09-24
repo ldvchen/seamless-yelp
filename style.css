@@ -3,27 +3,32 @@ td.rating div.yelp {
   font-size: 11px;
 }
 
+td.rating div.yelp .stars {
+  display: block;
+  margin: 3px 0;
+}
+
 td.rating div.yelp .num-reviews {
   font-size: 10px;
   display: block;
-  margin-top: 3px;
 }
 
 td.rating div.yelp-err,
 td.rating div.yelp-err a {
   color: red;
+  display: block;
+}
+
+#resultstable tbody tr td.rating img.waiting {
+  margin-bottom: 2px;
+  margin-left: 6px;
 }
 
 /* Clickable button styles */
-td.rating div.yelp a.button {
-  padding: 3px;
-  margin: 3px;
-  background-color: #C41200;
-  color: #FFFFFF;
-  border-radius: 3px;
+td.rating div.yelp a.button img {
+  border: 0;
 }
 
-td.rating div.yelp a.button:hover {
-  background-color: red;
-  text-decoration: none;
+td.rating div.yelp a.button:hover img {
+  opacity: 0.5;
 }

@@ -17,6 +17,7 @@
     "https://seamless-yelp.herokuapp.com/*"
   ],
   "web_accessible_resources": [
+    "images/yelpit.png",
     "images/loading.gif",
     "images/full.gif",
     "images/half.gif",
