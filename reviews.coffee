@@ -29,7 +29,7 @@ getReviews = (rating, review_count, url) ->
   if rating?
     stars = (fullStarStr for i in [0 ... Math.floor(rating)]).join('')
     stars += halfStarStr if rating isnt Math.floor(rating)
-    stars += emptyStarStr for i in [0 ... (5 - Math.ceil(rating)]
+    stars += emptyStarStr for i in [0 ... (5 - Math.ceil(rating))]
   else
     stars = "No Rating"
 
